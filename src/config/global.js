@@ -102,10 +102,10 @@ export default {
   },
   complementario: [
     {
-      tema: '',
-      referencia: '',
+      tema: 'Tema 1',
+      referencia: 'Texto',
       tipo: 'Sitio web',
-      link: '',
+      link: 'Link',
     },
   ],
   glosario: [
