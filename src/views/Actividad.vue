@@ -21,6 +21,17 @@ export default {
       titulo: 'Completar palabras',
       introduccion:
         '<b> Objetivo:</b> Evaluar la comprensión y el uso adecuado de  <em>Blockchain</em> y las palabras claves asociadas.',
+      instruccion:
+        'Digite en el espacio indicado la palabra que dé sentido a cada frase.',
+      imagen: require('@/assets/actividad/imagen1.png'),
+      textos: [
+        {
+          id: 1,
+          texto:
+            'La [respuesta], como rama de la biología que estudia la estructura de los seres vivos, está relacionada con la elaboración de prendas, ya que permite lograr una mejor adaptación y funcionalidad al cuerpo humano.',
+          respuesta: 'anatomía',
+        },
+      ],
       titulo_aprobado: '¡BUEN TRABAJO!..',
       titulo_reprobado: 'VUELVA A INTENTARLO..',
       mensaje_final_aprobado: '¡Excelente! Ha superado la actividad.',

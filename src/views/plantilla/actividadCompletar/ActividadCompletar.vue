@@ -13,7 +13,10 @@
     </div>
     <div class="tarjeta tarjeta--lightest-gray px-4 pb-4 pt-4 px-md-5">
       <ActividadResultados />
-      <ActividadParrafo />
+      <ActividadParrafo
+        :instruccion="parrafo.instruccion"
+        :imagen="parrafo.imagen"
+      />
     </div>
     <ActividadCompletarFooter class="mx-4 mx-md-5" />
   </div>

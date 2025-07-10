@@ -2,13 +2,12 @@
   <div>
     <div class="row align-items-center">
       <div class="d-none d-md-block col-3">
-        <img src="@/assets/actividad/imagen1.png" alt="" />
+        <img :src="imagen" alt="" />
       </div>
       <div class="col">
         <div>
           <h3 class="mb-4 pb-4">
-            Digite en el espacio indicado la palabra que dé sentido a cada
-            frase.
+            {{ instruccion }}
           </h3>
           <div class="row align-items-center">
             <ol class="lista-ol--cuadro lista-ol--separador">
@@ -70,6 +69,17 @@
 <script>
 export default {
   name: 'ActividadParrafo',
+  props: {
+    instruccion: {
+      type: String,
+      default:
+        'Digite en el espacio indicado la palabra que dé sentido a cada frase.',
+    },
+    imagen: {
+      type: String,
+      default: require('@/assets/actividad/imagen1.png'),
+    },
+  },
 }
 </script>
 
