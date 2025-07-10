@@ -16,6 +16,7 @@
       <ActividadParrafo
         :instruccion="parrafo.instruccion"
         :imagen="parrafo.imagen"
+        :textos="parrafo.textos"
       />
     </div>
     <ActividadCompletarFooter class="mx-4 mx-md-5" />

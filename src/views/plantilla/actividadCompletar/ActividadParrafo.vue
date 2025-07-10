@@ -11,52 +11,11 @@
           </h3>
           <div class="row align-items-center">
             <ol class="lista-ol--cuadro lista-ol--separador">
-              <li>
+              <li v-for="(item, index) in textos" :key="item.id" class="d-flex">
                 <div class="lista-ol--cuadro__vineta v--green">
-                  <span>1</span>
+                  <span>{{ index + 1 }}</span>
                 </div>
-                En el ámbito de la informática, _________ información consiste
-                en ocultarla, de forma que solo pueda interpretarse si se
-                dispone de una clave o un código.
-              </li>
-              <li>
-                <div class="lista-ol--cuadro__vineta v--green">
-                  <span>2</span>
-                </div>
-                Los _________ son los equipos que forman parte de la red
-                Blockchain, encargados de almacenar y distribuir en tiempo real
-                copias actualizadas de las operaciones que se realizan.
-              </li>
-              <li>
-                <div class="lista-ol--cuadro__vineta v--green">
-                  <span>3</span>
-                </div>
-                Tradicionalmente, _________ es el nombre con el que se llama a
-                las piezas que, adquiridas a cambio de dinero, sirve para
-                recibir un bien o servicio.
-              </li>
-              <li>
-                <div class="lista-ol--cuadro__vineta v--green">
-                  <span>4</span>
-                </div>
-                _________ es la base de datos transaccional distribuida, formada
-                por cadenas de bloques diseñadas para evitar su modificación una
-                vez que un dato ha sido publicado.
-              </li>
-              <li>
-                <div class="lista-ol--cuadro__vineta v--green">
-                  <span>4</span>
-                </div>
-                Se puede gozar de total _________, dependiendo de la necesidad
-                puntual de cada aplicación.
-              </li>
-              <li>
-                <div class="lista-ol--cuadro__vineta v--green">
-                  <span>5</span>
-                </div>
-                La _________ es una técnica destinada a alterar las
-                representaciones lingüísticas de ciertos mensajes con el fin de
-                hacerlos ininteligibles a receptores no autorizados.
+                {{ item.texto }}
               </li>
             </ol>
           </div>
@@ -78,6 +37,11 @@ export default {
     imagen: {
       type: String,
       default: require('@/assets/actividad/imagen1.png'),
+    },
+    textos: {
+      type: Array,
+      required: true,
+      default: () => [],
     },
   },
 }
