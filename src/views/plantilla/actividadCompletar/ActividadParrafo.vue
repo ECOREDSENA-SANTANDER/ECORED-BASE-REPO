@@ -15,7 +15,10 @@
                 <div class="lista-ol--cuadro__vineta v--green">
                   <span>{{ index + 1 }}</span>
                 </div>
-                {{ item.texto }}
+                <div
+                  class="texto-con-input"
+                  v-html="procesarTextoConInput(item.texto, item.id)"
+                ></div>
               </li>
             </ol>
           </div>
@@ -32,7 +35,7 @@ export default {
     instruccion: {
       type: String,
       default:
-        'Digite en el espacio indicado la palabra que dé sentido a cada frase.',
+        'Digite en el espacio indicado la palabra que dé sentido a cada frase.',
     },
     imagen: {
       type: String,
@@ -44,6 +47,52 @@ export default {
       default: () => [],
     },
   },
+  data() {
+    return {
+      respuestasUsuario: {},
+    }
+  },
+  mounted() {
+    // Inicializar respuestas del usuario
+    this.textos.forEach(item => {
+      this.$set(this.respuestasUsuario, item.id, '')
+    })
+
+    // Agregar event listeners para los inputs después de que se rendericen
+    this.$nextTick(() => {
+      this.agregarEventListeners()
+    })
+  },
+  methods: {
+    procesarTextoConInput(texto, itemId) {
+      // Reemplazar [respuesta] con un input
+      return texto.replace(
+        /\[respuesta\]/g,
+        `<input type="text" class="input-inline" data-item-id="${itemId}" placeholder="[?]" />`,
+      )
+    },
+
+    agregarEventListeners() {
+      // Agregar event listeners a todos los inputs
+      const inputs = this.$el.querySelectorAll('.input-inline')
+      inputs.forEach(input => {
+        input.addEventListener('input', this.manejarCambioInput)
+      })
+    },
+
+    manejarCambioInput(event) {
+      const itemId = parseInt(event.target.dataset.itemId)
+      const valor = event.target.value
+      this.$set(this.respuestasUsuario, itemId, valor)
+
+      // Emitir evento para el componente padre si es necesario
+      this.$emit('respuesta-cambiada', {
+        itemId: itemId,
+        valor: valor,
+        todasLasRespuestas: this.respuestasUsuario,
+      })
+    },
+  },
 }
 </script>
 
@@ -53,12 +102,49 @@ img
   height: auto
   display: block
   margin: auto
+
+.texto-con-input
+  flex: 1
+  line-height: 1.6
+
+// Estilos para el input inline
+::v-deep .input-inline
+  display: inline !important
+  border: 2px solid #ddd !important
+  background-color: #f5d982 !important
+  padding: 4px 8px !important
+  margin: 0 2px !important
+  font-size: inherit !important
+  font-family: inherit !important
+  line-height: 1.2 !important
+  min-width: 100px !important
+  max-width: 150px !important
+  text-align: center !important
+  border-radius: 4px !important
+  transition: all 0.3s ease !important
+  vertical-align: baseline !important
+  height: auto !important
+  box-sizing: border-box !important
+
+  &:focus
+    outline: none !important
+    border-color: #556a82 !important
+    background-color: #f0d050 !important
+    box-shadow: 0 0 0 2px rgba(85, 106, 130, 0.2) !important
+
+  &::placeholder
+    color: #666 !important
+    font-size: inherit !important
+    font-weight: normal !important
+
 .tarjeta--pregunta
   background: #dce4eb
+
 .tarjeta-respuesta
   border: 2px solid transparent
   cursor: pointer
   transition: border-color 0.2s
+
   &:hover
     border-color: #556a82
 
@@ -68,12 +154,14 @@ img
   &--correcta
     border-color: #61ca92ff
     background-color: #ebfff0ff
+
     &:hover
       border-color: #61ca92ff
 
   &--incorrecta
     border-color: #ff6b6bff
     background-color: #ffedecff
+
     &:hover
       border-color: #ff6b6bff
 
@@ -86,6 +174,7 @@ img
     height: 32px
     position: relative
     background-image: url('~@/assets/actividad/vacio.svg')
+
     &:hover
       background-image: url('~@/assets/actividad/vacio-hover.svg')
 
