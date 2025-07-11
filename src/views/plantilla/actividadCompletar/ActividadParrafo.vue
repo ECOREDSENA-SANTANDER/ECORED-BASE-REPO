@@ -85,7 +85,7 @@ export default {
       const valor = event.target.value
       this.$set(this.respuestasUsuario, itemId, valor)
 
-      // Emitir evento para el componente padre si es necesario
+      // Emitir evento para el componente padre
       this.$emit('respuesta-cambiada', {
         itemId: itemId,
         valor: valor,
