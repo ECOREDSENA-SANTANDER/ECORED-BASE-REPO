@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row align-items-center">
-      <div class="d-none d-md-block col-3">
+      <div class="d-none d-lg-block col-3">
         <img :src="imagen" alt="" />
       </div>
       <div class="col">

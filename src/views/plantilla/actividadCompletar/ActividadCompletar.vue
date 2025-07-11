@@ -81,16 +81,34 @@ export default {
       this.respuestasUsuario = { ...data.todasLasRespuestas }
     },
 
+    // Nueva función para normalizar texto removiendo tildes y caracteres especiales
+    normalizarTexto(texto) {
+      return texto
+        .toLowerCase()
+        .trim()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '') // Remover diacríticos (tildes, acentos)
+        .replace(/[^a-z0-9]/g, '') // Remover caracteres especiales, solo alfanuméricos
+    },
+
     verificarRespuestas() {
       const resultados = []
       let correctas = 0
 
       this.parrafo.textos.forEach(item => {
-        const respuestaUsuario = (this.respuestasUsuario[item.id] || '')
-          .trim()
-          .toLowerCase()
-        const respuestaCorrecta = item.respuesta.toLowerCase()
-        const esCorrecta = respuestaUsuario === respuestaCorrecta
+        const respuestaUsuario = this.respuestasUsuario[item.id] || ''
+        const respuestaCorrecta = item.respuesta
+
+        // Normalizar ambas respuestas para comparación sin tildes
+        const respuestaUsuarioNormalizada = this.normalizarTexto(
+          respuestaUsuario,
+        )
+        const respuestaCorrectaNormalizada = this.normalizarTexto(
+          respuestaCorrecta,
+        )
+
+        const esCorrecta =
+          respuestaUsuarioNormalizada === respuestaCorrectaNormalizada
 
         if (esCorrecta) {
           correctas++
@@ -99,8 +117,8 @@ export default {
         resultados.push({
           id: item.id,
           pregunta: item.texto,
-          respuestaUsuario: this.respuestasUsuario[item.id] || '',
-          respuestaCorrecta: item.respuesta,
+          respuestaUsuario: respuestaUsuario,
+          respuestaCorrecta: respuestaCorrecta,
           esCorrecta: esCorrecta,
         })
       })
