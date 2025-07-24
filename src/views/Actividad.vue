@@ -24,6 +24,7 @@ export default {
       instruccion:
         'Digite en el espacio indicado la palabra que dé sentido a cada frase.',
       imagen: require('@/assets/actividad/imagen1.png'),
+      barajarPreguntas: true,
       textos: [
         {
           id: 1,

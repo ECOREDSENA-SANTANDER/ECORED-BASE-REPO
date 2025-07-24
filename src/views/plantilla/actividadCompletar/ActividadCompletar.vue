@@ -73,7 +73,9 @@ export default {
   },
   methods: {
     inicializarRespuestas() {
-      // Inicializar respuestas vacías para cada texto
+      if (this.parrafo.textos.length > 0 && this.parrafo?.barajarPreguntas) {
+        this.parrafo.textos.sort(() => Math.random() - 0.5)
+      }
       this.parrafo.textos.forEach(item => {
         this.$set(this.respuestasUsuario, item.id, '')
       })
