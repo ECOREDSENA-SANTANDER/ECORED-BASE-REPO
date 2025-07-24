@@ -37,29 +37,6 @@
       class="mx-4 mx-md-5"
       @continuar="verificarRespuestas"
     />
-
-    <!-- AUDIO -->
-    <audio ref="sonidoGanar" preload="auto">
-      <source
-        src="@/assets/actividad/audio/end-game-success.mp3"
-        type="audio/mpeg"
-      />
-      <source
-        src="@/assets/actividad/audio/end-game-success.mp3"
-        type="audio/wav"
-      />
-    </audio>
-
-    <audio ref="sonidoPerder" preload="auto">
-      <source
-        src="@/assets/actividad/audio/end-game-fail.mp3"
-        type="audio/mpeg"
-      />
-      <source
-        src="@/assets/actividad/audio/end-game-fail.mp3"
-        type="audio/wav"
-      />
-    </audio>
   </div>
 </template>
 
@@ -67,6 +44,8 @@
 import ActividadParrafo from './ActividadParrafo'
 import ActividadCompletarFooter from './ActividadCompletarFooter'
 import ActividadResultados from './ActividadResultados'
+import endGameSuccessSound from '@/assets/actividad/audio/end-game-success.mp3'
+import endGameFailSound from '@/assets/actividad/audio/end-game-fail.mp3'
 
 export default {
   name: 'ActividadCompletar',
@@ -115,18 +94,9 @@ export default {
     },
 
     // REPRODUCIR SONIDOS
-    reproducirSonido(tipo) {
-      try {
-        if (tipo === 'ganar') {
-          this.$refs.sonidoGanar.currentTime = 0 // Reiniciar
-          this.$refs.sonidoGanar.play()
-        } else if (tipo === 'perder') {
-          this.$refs.sonidoPerder.currentTime = 0 // Reiniciar
-          this.$refs.sonidoPerder.play()
-        }
-      } catch (error) {
-        console.warn('Error al reproducir sonido:', error)
-      }
+    reproducirSonido(audioSrc) {
+      const audio = new Audio(audioSrc)
+      audio.play()
     },
 
     verificarRespuestas() {
@@ -166,16 +136,11 @@ export default {
       this.mostrarResultados = true
 
       // REPRODUCIR SONIDO SEGUN RESULTADO
+      //-------
       if (this.porcentajeAprobacion >= 70) {
-        // Considera "ganar" si aprueba el 70% o más
-        setTimeout(() => {
-          this.reproducirSonido('ganar')
-        }, 600) // Delay para que termine la animación del círculo
+        this.reproducirSonido(endGameSuccessSound)
       } else {
-        // Considera "perder" si aprueba menos del 70%
-        setTimeout(() => {
-          this.reproducirSonido('perder')
-        }, 600)
+        this.reproducirSonido(endGameFailSound)
       }
     },
 
