@@ -65,10 +65,10 @@ export default {
   },
   methods: {
     procesarTextoConInput(texto, itemId) {
-      // Reemplazar [respuesta] con un input
+      // Reemplazar [respuesta] con un input envuelto en un span para posicionamiento
       return texto.replace(
         /\[respuesta\]/g,
-        `<input type="text" class="input-inline" data-item-id="${itemId}" placeholder="[?]" />`,
+        `<span class="input-container"><input type="text" class="input-inline" data-item-id="${itemId}" placeholder="[?]" /></span>`,
       )
     },
 
@@ -106,6 +106,12 @@ img
 .texto-con-input
   flex: 1
   line-height: 1.6
+
+// Contenedor para input e icono
+::v-deep .input-container
+  display: inline-block
+  position: relative
+  white-space: nowrap
 
 // Estilos para el input inline
 ::v-deep .input-inline

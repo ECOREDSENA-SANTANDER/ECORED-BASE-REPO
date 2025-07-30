@@ -137,18 +137,8 @@ export default {
           correctas++
         }
 
-        // Aplicar clase CSS directamente al input correspondiente
-        const input = this.$el.querySelector(`input[data-item-id="${item.id}"]`)
-        if (input) {
-          // Remover clases anteriores
-          input.classList.remove('input-correcto', 'input-incorrecto')
-          // Agregar clase según resultado
-          input.classList.add(
-            esCorrecta ? 'input-correcto' : 'input-incorrecto',
-          )
-          // Deshabilitar input para evitar cambios
-          input.disabled = true
-        }
+        // Aplicar feedback visual con icono
+        this.aplicarFeedbackConIcono(item.id, esCorrecta)
 
         resultados.push({
           id: item.id,
@@ -166,9 +156,44 @@ export default {
       this.iniciarContadorResultados()
     },
 
+    aplicarFeedbackConIcono(itemId, esCorrecta) {
+      const input = this.$el.querySelector(`input[data-item-id="${itemId}"]`)
+      if (input) {
+        // Remover clases anteriores
+        input.classList.remove('input-correcto', 'input-incorrecto')
+
+        // Agregar clase según resultado
+        input.classList.add(esCorrecta ? 'input-correcto' : 'input-incorrecto')
+
+        // Deshabilitar input para evitar cambios
+        input.disabled = true
+
+        // Crear y agregar icono
+        this.agregarIconoFeedback(input, esCorrecta)
+      }
+    },
+
+    agregarIconoFeedback(input, esCorrecta) {
+      // Verificar si ya existe un icono para evitar duplicados
+      const iconoExistente = input.parentNode.querySelector('.feedback-icon')
+      if (iconoExistente) {
+        iconoExistente.remove()
+      }
+
+      // Crear elemento del icono
+      const icono = document.createElement('span')
+      icono.className = `feedback-icon ${
+        esCorrecta ? 'feedback-icon--correcto' : 'feedback-icon--incorrecto'
+      }`
+
+      // Insertar el icono después del input
+      input.parentNode.insertBefore(icono, input.nextSibling)
+    },
+
     iniciarContadorResultados() {
       this.verificando = true
-      this.contadorResultados = this.parrafo.textos.length
+      this.contadorResultados =
+        this.porcentajeAprobacion >= 70 ? 3 : this.parrafo.textos.length
 
       this.intervaloContador = setInterval(() => {
         this.contadorResultados--
@@ -210,6 +235,12 @@ export default {
           input.disabled = false
           input.classList.remove('input-correcto', 'input-incorrecto')
         })
+
+        // Remover todos los iconos de feedback
+        const iconos = this.$el.querySelectorAll('.feedback-icon')
+        iconos.forEach(icono => {
+          icono.remove()
+        })
       })
     },
   },
@@ -223,4 +254,31 @@ export default {
 
 .tarjeta--lightest-gray
   border: 3px solid #dce4eb
+
+// Estilos para los iconos de feedback
+::v-deep .feedback-icon
+  display: inline-block
+  width: 20px
+  height: 20px
+  margin-right: 8px
+  background-size: contain
+  background-repeat: no-repeat
+  background-position: center
+  vertical-align: middle
+  animation: fadeInScale 0.3s ease-out
+
+  &--correcto
+    background-image: url('~@/assets/actividad/correcto.svg')
+
+  &--incorrecto
+    background-image: url('~@/assets/actividad/incorrecto.svg')
+
+// Animación para la aparición del icono
+@keyframes fadeInScale
+  0%
+    opacity: 0
+    transform: scale(0.5)
+  100%
+    opacity: 1
+    transform: scale(1)
 </style>
