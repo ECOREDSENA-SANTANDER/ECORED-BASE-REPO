@@ -35,6 +35,8 @@
     <ActividadCompletarFooter
       v-if="!mostrarResultados"
       class="mx-4 mx-md-5"
+      :verificando="verificando"
+      :contador="contadorResultados"
       @continuar="verificarRespuestas"
     />
   </div>
@@ -66,10 +68,19 @@ export default {
       mostrarResultados: false,
       resultadosVerificacion: [],
       porcentajeAprobacion: 0,
+      verificando: false,
+      contadorResultados: 0,
+      intervaloContador: null,
     }
   },
   mounted() {
     this.inicializarRespuestas()
+  },
+  beforeDestroy() {
+    // Limpiar intervalo si existe
+    if (this.intervaloContador) {
+      clearInterval(this.intervaloContador)
+    }
   },
   methods: {
     inicializarRespuestas() {
@@ -102,6 +113,8 @@ export default {
     },
 
     verificarRespuestas() {
+      if (this.verificando) return // Evitar múltiples clics
+
       const resultados = []
       let correctas = 0
 
@@ -124,6 +137,19 @@ export default {
           correctas++
         }
 
+        // Aplicar clase CSS directamente al input correspondiente
+        const input = this.$el.querySelector(`input[data-item-id="${item.id}"]`)
+        if (input) {
+          // Remover clases anteriores
+          input.classList.remove('input-correcto', 'input-incorrecto')
+          // Agregar clase según resultado
+          input.classList.add(
+            esCorrecta ? 'input-correcto' : 'input-incorrecto',
+          )
+          // Deshabilitar input para evitar cambios
+          input.disabled = true
+        }
+
         resultados.push({
           id: item.id,
           pregunta: item.texto,
@@ -135,19 +161,43 @@ export default {
 
       this.resultadosVerificacion = resultados
       this.porcentajeAprobacion = (correctas / this.parrafo.textos.length) * 100
-      this.mostrarResultados = true
 
-      // REPRODUCIR SONIDO SEGUN RESULTADO
-      //-------
-      if (this.porcentajeAprobacion >= 70) {
-        this.reproducirSonido(endGameSuccessSound)
-      } else {
-        this.reproducirSonido(endGameFailSound)
-      }
+      // Iniciar contador de 10 segundos
+      this.iniciarContadorResultados()
+    },
+
+    iniciarContadorResultados() {
+      this.verificando = true
+      this.contadorResultados = this.parrafo.textos.length
+
+      this.intervaloContador = setInterval(() => {
+        this.contadorResultados--
+
+        if (this.contadorResultados <= 0) {
+          clearInterval(this.intervaloContador)
+          this.mostrarResultados = true
+          this.verificando = false
+
+          // REPRODUCIR SONIDO SEGUN RESULTADO
+          //-------
+          if (this.porcentajeAprobacion >= 70) {
+            this.reproducirSonido(endGameSuccessSound)
+          } else {
+            this.reproducirSonido(endGameFailSound)
+          }
+        }
+      }, 1000)
     },
 
     reiniciarActividad() {
+      // Limpiar intervalo si existe
+      if (this.intervaloContador) {
+        clearInterval(this.intervaloContador)
+      }
+
       this.mostrarResultados = false
+      this.verificando = false
+      this.contadorResultados = 0
       this.inicializarRespuestas()
       this.resultadosVerificacion = []
       this.porcentajeAprobacion = 0
@@ -157,6 +207,8 @@ export default {
         const inputs = this.$el.querySelectorAll('.input-inline')
         inputs.forEach(input => {
           input.value = ''
+          input.disabled = false
+          input.classList.remove('input-correcto', 'input-incorrecto')
         })
       })
     },

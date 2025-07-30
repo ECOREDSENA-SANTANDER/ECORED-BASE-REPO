@@ -137,6 +137,32 @@ img
     font-size: inherit !important
     font-weight: normal !important
 
+  // Estados de validación
+  &.input-correcto
+    border-color: #28a745 !important
+    background-color: #d4edda !important
+    color: #155724 !important
+
+    &:focus
+      border-color: #28a745 !important
+      background-color: #c3e6cb !important
+      box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.25) !important
+
+  &.input-incorrecto
+    border-color: #dc3545 !important
+    background-color: #f8d7da !important
+    color: #721c24 !important
+
+    &:focus
+      border-color: #dc3545 !important
+      background-color: #f1b0b7 !important
+      box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25) !important
+
+  // Estado deshabilitado
+  &:disabled
+    opacity: 0.8 !important
+    cursor: not-allowed !important
+
 .tarjeta--pregunta
   background: #dce4eb
 

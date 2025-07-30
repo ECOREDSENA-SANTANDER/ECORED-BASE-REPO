@@ -4,10 +4,13 @@
       <div class="col-auto">
         <button
           class="boton btn-lg boton--b py-3 px-4"
+          :disabled="verificando"
           @click="$emit('continuar')"
         >
-          <span>Verificar respuestas</span>
-          <i class="fas fa-arrow-right"></i>
+          <span v-if="!verificando">Verificar respuestas</span>
+          <span v-else>Mostrando resultados en {{ contador }}s</span>
+          <i v-if="!verificando" class="fas fa-arrow-right"></i>
+          <i v-else class="fas fa-clock"></i>
         </button>
       </div>
     </div>
@@ -17,6 +20,16 @@
 <script>
 export default {
   name: 'ActividadCompletarFooter',
+  props: {
+    verificando: {
+      type: Boolean,
+      default: false,
+    },
+    contador: {
+      type: Number,
+      default: 0,
+    },
+  },
 }
 </script>
 
