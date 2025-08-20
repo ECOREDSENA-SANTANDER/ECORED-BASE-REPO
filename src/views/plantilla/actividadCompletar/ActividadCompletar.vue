@@ -192,7 +192,7 @@ export default {
 
     iniciarContadorResultados() {
       this.verificando = true
-      this.contadorResultados = this.parrafo.textos.length
+      this.contadorResultados = 1 //
 
       this.intervaloContador = setInterval(() => {
         this.contadorResultados--

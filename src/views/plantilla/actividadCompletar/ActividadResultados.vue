@@ -46,7 +46,7 @@
             />
           </svg>
           <div class="percentage-text">
-            {{ Math.round(porcentajeAprobadas) }}%
+            {{ Math.round(porcentajeAprobadas) }} %
           </div>
         </div>
 
@@ -86,20 +86,20 @@ export default {
     },
     mensajeAprobado: {
       type: String,
-      default: '¡Excelente! Ha superado la actividad.',
+      default: 'Ha superado la actividad.',
     },
     mensajeReprobado: {
       type: String,
       default:
-        'Le recomendamos volver a revisar el componente formativo e intentar nuevamente la actividad didáctica.',
+        'Se recomienda volver a revisar el componente formativo e intentar nuevamente la actividad didáctica.',
     },
     tituloAprobado: {
       type: String,
-      default: '¡BUEN TRABAJO!',
+      default: '¡FELICIDADES!',
     },
     tituloReprobado: {
       type: String,
-      default: 'VUELVE A INTENTARLO',
+      default: 'VUELVA A INTENTARLO',
     },
     porcentajeAprobadas: {
       type: Number,
