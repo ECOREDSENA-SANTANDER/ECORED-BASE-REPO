@@ -2,24 +2,18 @@
   .curso-main-container.pb-3
     BannerInterno(icono="far fa-question-circle" titulo="Actividad didáctica")
     .container.tarjeta.tarjeta--blanca.p-4.p-md-5
-  
-      #Actividad_Completar_Frases
-      <ActividadCompletar :parrafo="parrafo"/>
-
-      #Actividad_Cuestionario
-      //<Actividad :cuestionario="cuestionario"/>
-  
+      // Para cuestionario usar: ActividadController(:cuestionario="cuestionario") 
+      // Para parrafo usar: ActividadController(:parrafo="parrafo")
+      ActividadController(:cuestionario="cuestionario")
   </template>
 
 <script>
-import ActividadCompletar from '@/views/plantilla/actividadCompletar/ActividadCompletar.vue'
-import Actividad from 'ecored-pkg-fliz/plugin/components/actividad/Actividad.vue'
+import ActividadController from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/actividad/ActividadController.vue'
 
 export default {
   name: 'ActividadDidactica',
   components: {
-    ActividadCompletar,
-    Actividad,
+    ActividadController,
   },
   data: () => ({
     parrafo: {

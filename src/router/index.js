@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Inicio from 'ecored-pkg-fliz/plugin/components/Inicio.vue'
-import Curso from 'ecored-pkg-fliz/plugin/components/plantilla/Curso.vue'
-import Glosario from 'ecored-pkg-fliz/plugin/components/Glosario.vue'
-import Referencias from 'ecored-pkg-fliz/plugin/components/Referencias.vue'
-import Creditos from 'ecored-pkg-fliz/plugin/components/Creditos.vue'
-import Complementario from 'ecored-pkg-fliz/plugin/components/Complementario.vue'
+import Inicio from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/Inicio.vue'
+import Curso from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/plantilla/Curso.vue'
+import Glosario from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/Glosario.vue'
+import Referencias from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/Referencias.vue'
+import Creditos from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/Creditos.vue'
+import Complementario from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/Complementario.vue'
 
 Vue.use(VueRouter)
 
