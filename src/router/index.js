@@ -5,7 +5,6 @@ import Curso from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/plantilla/C
 import Glosario from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/Glosario.vue'
 import Referencias from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/Referencias.vue'
 import Creditos from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/Creditos.vue'
-import Complementario from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/Complementario.vue'
 
 Vue.use(VueRouter)
 
@@ -72,11 +71,6 @@ const router = new VueRouter({
       path: '/glosario',
       name: 'glosario',
       component: Glosario,
-    },
-    {
-      path: '/complementario',
-      name: 'complementario',
-      component: Complementario,
     },
     {
       path: '/referencias',
