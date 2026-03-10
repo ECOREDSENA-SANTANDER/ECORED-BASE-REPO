@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Inicio from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/Inicio.vue'
-import Curso from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/plantilla/Curso.vue'
-import Glosario from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/Glosario.vue'
-import Referencias from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/Referencias.vue'
-import Creditos from '@ecoredsena.dev/ecored-pkg-sena/plugin/components/Creditos.vue'
+import Inicio from '@ecored-sena/base-kit/plugin/components/Inicio.vue'
+import Curso from '@ecored-sena/base-kit/plugin/components/plantilla/Curso.vue'
+import Glosario from '@ecored-sena/base-kit/plugin/components/Glosario.vue'
+import Referencias from '@ecored-sena/base-kit/plugin/components/Referencias.vue'
+import Creditos from '@ecored-sena/base-kit/plugin/components/Creditos.vue'
 
 Vue.use(VueRouter)
 
