@@ -16,7 +16,7 @@
     "vue": "^2.7.14",
     "vue-router": "^3.6.5",
     "vuex": "^3.4.0",
-    "@ecored-sena/base-kit": "0.0.x"
+    "@ecored-sena/base-kit": "0.0.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.19",

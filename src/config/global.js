@@ -121,8 +121,9 @@ export default {
       autores: [
         {
           nombre: 'Claudia Johanna Gómez Pérez',
-          cargo: 'Responsable del ecosistema',
-          centro: 'Dirección General',
+          cargo:
+            'Responsable Ecosistema de Recursos Educativos Digitales (RED)',
+          centro: 'Centro Agroturístico - Regional Santander',
         },
         {
           nombre: 'Edison Eduardo Mantilla Cuadros',
@@ -135,9 +136,9 @@ export default {
       titulo: 'CONTENIDO INSTRUCCIONAL',
       autores: [
         {
-          nombre: '--',
+          nombre: ' ',
           cargo: 'Experto temático',
-          centro: '--',
+          centro: ' ',
         },
       ],
     },
@@ -145,17 +146,17 @@ export default {
       titulo: 'DISEÑO Y DESARROLLO DE RECURSOS EDUCATIVOS DIGITALES',
       autores: [
         {
-          nombre: '--',
+          nombre: ' ',
           cargo: 'Diseñador de contenidos',
           centro: 'Centro Agroturístico - Regional Santander',
         },
         {
-          nombre: '--',
+          nombre: ' ',
           cargo: 'Desarrollador <em>full stack</em>',
           centro: 'Centro Agroturístico - Regional Santander',
         },
         {
-          nombre: 'Maria Alejandra Vera Briceño',
+          nombre: ' ',
           cargo: 'Animadora y productora audiovisual',
           centro: 'Centro Agroturístico - Regional Santander',
         },
@@ -165,12 +166,12 @@ export default {
       titulo: 'VALIDACIÓN RECURSO EDUCATIVO DIGITAL',
       autores: [
         {
-          nombre: 'Erika Daniela Manrique Rueda',
+          nombre: ' ',
           cargo: 'Validadora y vinculadora de recursos educativos digitales',
           centro: 'Centro Agroturístico - Regional Santander',
         },
         {
-          nombre: 'Laura Paola Gelvez Manosalva',
+          nombre: ' ',
           cargo: 'Evaluadora de contenidos inclusivos y accesibles',
           centro: 'Centro Agroturístico - Regional Santander',
         },
